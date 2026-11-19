@@ -40,6 +40,10 @@ export ANDROID_HOME=/path/to/android-sdk
 Используется arm64-сборка aapt2 из Termux и обёртка, подключаемая через
 `android.aapt2FromMavenOverride` — подробности в `docs/FEATURES.md`.
 
+## CI
+
+GitHub Actions собирает APK на каждый пуш и релиз по тегу — см. `docs/CI.md`.
+
 ## Структура
 
 ```
