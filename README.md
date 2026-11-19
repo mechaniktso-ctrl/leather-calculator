@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/icon.png" width="120" alt="Иконка">
+</p>
+
 # Leather Calculator — калькулятор и учебник для кожевников
 
 Android-приложение: считает расход кожи, стоимость материала и работы, помогает с раскладкой,
@@ -39,6 +43,11 @@ export ANDROID_HOME=/path/to/android-sdk
 Особенность: на aarch64 (сборка прямо на телефоне) Google-овский aapt2 не запускается.
 Используется arm64-сборка aapt2 из Termux и обёртка, подключаемая через
 `android.aapt2FromMavenOverride` — подробности в `docs/FEATURES.md`.
+
+## Скриншоты
+
+Пока в репозитории только иконка: кадры снимаются с телефона, инструкция —
+`docs/SCREENSHOTS.md` и `scripts/capture-screenshots.sh`.
 
 ## CI
 
