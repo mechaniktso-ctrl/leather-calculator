@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.compose'
+}
+
+android {
+    namespace 'ru.leather.calc'
+    compileSdk 35
+    buildToolsVersion '35.0.0'
+
+    // Ключ и пароли не хранятся в репозитории: берём из ~/.gradle/gradle.properties
+    // или переменных окружения.
+    signingConfigs {
+        release {
+            def keyPath = System.getenv("LEATHER_KEYSTORE") ?: (project.findProperty("leatherKeystore") ?: "")
+            if (keyPath) {
+                storeFile file(keyPath)
+                storePassword System.getenv("LEATHER_STORE_PASSWORD") ?: (project.findProperty("leatherStorePassword") ?: "")
+                keyAlias System.getenv("LEATHER_KEY_ALIAS") ?: (project.findProperty("leatherKeyAlias") ?: "leathercalc")
+                keyPassword System.getenv("LEATHER_KEY_PASSWORD") ?: (project.findProperty("leatherKeyPassword") ?: "")
+            }
+        }
+    }
+
+    defaultConfig {
+        applicationId "ru.leather.calc"
+        minSdk 24
+        targetSdk 35
+        versionCode 34
+        versionName "1.19"
+    }
+
+    buildFeatures { compose true }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            if (signingConfigs.release.storeFile != null) signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = '17' }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.2'
+    implementation 'androidx.activity:activity-compose:1.9.3'
+    implementation platform('androidx.compose:compose-bom:2024.10.01')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}

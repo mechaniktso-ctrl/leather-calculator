@@ -1,0 +1,29 @@
+# Gradle / Android
+.gradle/
+build/
+app/build/
+.kotlin/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ключи и секреты
+keys/
+*.jks
+*.keystore
+*.p12
+*.pem
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+*.log
+
+# выходные сборки
+*.apk
+*.aab
+*.ap_
+*.dex
