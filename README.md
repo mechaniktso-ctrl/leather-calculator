@@ -46,8 +46,12 @@ export ANDROID_HOME=/path/to/android-sdk
 
 ## Скриншоты
 
-Пока в репозитории только иконка: кадры снимаются с телефона, инструкция —
-`docs/SCREENSHOTS.md` и `scripts/capture-screenshots.sh`.
+| Проекты |
+|---|
+| ![Проекты](docs/screenshots/projects-1.png) |
+
+Остальные экраны добавляются скриптом `scripts/import-screenshots.py`: он распознаёт
+снимки из галереи, определяет экран по тексту и сжимает их. Подробности — `docs/SCREENSHOTS.md`.
 
 ## CI
 

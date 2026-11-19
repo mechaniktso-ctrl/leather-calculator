@@ -1,27 +1,33 @@
 # Скриншоты
 
-Снимаются с живого приложения: `scripts/capture-screenshots.sh` (adb) или вручную.
-Актуальный способ на телефоне без adb — через Shizuku:
+Снимаются с телефона штатно: **Power + Volume Down**. Снимки попадают в
+`/sdcard/DCIM/Screenshots/`.
+
+Затем импорт:
 
 ```bash
-screencap -p /sdcard/Download/DSH-Go/shots/01-leather.png
+python3 scripts/import-screenshots.py
 ```
 
-Нужны шесть кадров:
+Скрипт берёт файлы за последние 2 дня, распознаёт текст (Tesseract, rus+eng),
+определяет экран по маркерам и кладёт сжатые PNG в `docs/screenshots/`:
+`leather-N.png`, `layout-N.png`, `costs-N.png`, `learn-N.png`, `wizard-N.png`,
+`measure-N.png`, `projects-N.png`, `stitch-N.png`, `stock-N.png`.
 
-| Файл | Экран | Что должно быть видно |
-|---|---|---|
-| 01-leather.png | Кожа | витрина с площадью и ценой, шаблоны, список деталей |
-| 02-layout.png | Раскладка | схема листа с деталями, заполнение, кнопки PDF/SVG/DXF |
-| 03-costs.png | Деньги | каталог фурнитуры, смета, цена |
-| 04-learn.png | Учебник | прогресс, урок с фото |
-| 05-wizard.png | Мастер | шаг «Изделие» с шаблонами и эскизом |
-| 06-measure.png | Замер шкуры | фото с контуром и эталоном, площадь |
+Если Tesseract на телефоне не установлен: `apt-get install tesseract-ocr tesseract-ocr-rus`.
 
-После съёмки: `python3 scripts/optimize-screenshots.py`, затем вставить в README:
+## Нужные кадры
 
-```markdown
-| Кожа | Раскладка |
+| Экран | Что должно быть видно |
 |---|---|
-| ![Кожа](docs/screenshots/01-leather-small.png) | ![Раскладка](docs/screenshots/02-layout-small.png) |
-```
+| Кожа | витрина с площадью и ценой, шаблоны, детали |
+| Раскладка | схема листа, заполнение, кнопки PDF/SVG/DXF |
+| Деньги | каталог фурнитуры, смета, цена |
+| Учебник | прогресс и урок с фото |
+| Мастер | шаг «Изделие» с шаблонами и эскизом |
+| Замер шкуры | фото с контуром и эталоном, площадь |
+
+## Старый способ (adb)
+
+`scripts/capture-screenshots.sh` — проходит по экранам через `adb shell input tap`
+и делает `screencap`. Нужен подключённый adb.
